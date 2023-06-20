@@ -1,0 +1,28 @@
+stages:
+    - deploy
+    - test
+    
+
+deploy:
+    stage: deploy
+    image: alpine
+    before_script:
+    - apk add --update openssh-client sshpass
+    - mkdir -p ~/.ssh
+    script:
+    - sshpass -p $SSH_PASSWORD ssh -o StrictHostKeyChecking=no $SSH_LOGIN@$SSH_HOST "cd /var/www/u1301894/data/www/test.otzyvy-na-zakaz.ru && git pull && /opt/php/8.1/bin/php /var/www/u1301894/data/www/composer.phar install && /opt/php/8.1/bin/php /var/www/u1301894/data/www/composer.phar update && cp /var/www/u1301894/data/www/test.otzyvy-na-zakaz.ru/src/.htaccess2 /var/www/u1301894/data/www/test.otzyvy-na-zakaz.ru/.htaccess && cp /var/www/u1301894/data/.env /var/www/u1301894/data/www/test.otzyvy-na-zakaz.ru/"
+    only:
+    - main
+    - merged_results
+
+test: 
+    stage: test
+    image: alpine
+    before_script:
+    - apk add --update openssh-client sshpass
+    - mkdir -p ~/.ssh
+    script:
+    - sshpass -p $SSH_PASSWORD ssh -o StrictHostKeyChecking=no $SSH_LOGIN@$SSH_HOST "cd /var/www/u1301894/data/www/real.otzyvy-na-zakaz.ru && git pull && /opt/php/8.1/bin/php /var/www/u1301894/data/www/composer.phar install && /opt/php/8.1/bin/php /var/www/u1301894/data/www/composer.phar update && cp /var/www/u1301894/data/www/real.otzyvy-na-zakaz.ru/src/.htaccess2 /var/www/u1301894/data/www/real.otzyvy-na-zakaz.ru/.htaccess && cp /var/www/u1301894/data/.env /var/www/u1301894/data/www/real.otzyvy-na-zakaz.ru/"
+    only:
+    - dev
+    - merged_results
