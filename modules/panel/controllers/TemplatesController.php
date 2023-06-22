@@ -381,8 +381,8 @@ class TemplatesController extends MainController
   {
     if(Yii::$app->request->isAjax){
       $data = Yii::$app->request->post();
-      $dataSet = $data['count'] + rand(0,999);
-      $clod = $data['count'];
+      $dataSet = (int) $data['count'] + rand(0,999);
+      $clod = (int) $data['count'];
       Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
       return [
         'form' => $this->renderPartial('or-param', ['data' => $dataSet, 'clod' => $clod]),
