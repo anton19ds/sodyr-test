@@ -290,6 +290,7 @@ class TemplatesController extends MainController
    */
   public function actionUpdate($id)
   {
+    $arrty = '';
     $model = $this->findModel($id);
     if ($this->request->isPost) {
       $data = $this->request->post();
@@ -364,8 +365,8 @@ class TemplatesController extends MainController
     if (Yii::$app->request->isAjax) {
 
       $data = Yii::$app->request->post();
-      $count = $data['count'] + rand(0,999);
-      $is = $data['is'];
+      $count = (int) $data['count'] + rand(0,999);
+      $is = (int) $data['is'];
       
 
       Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -380,11 +381,11 @@ class TemplatesController extends MainController
   {
     if(Yii::$app->request->isAjax){
       $data = Yii::$app->request->post();
-      $data = $data['count'] + rand(0,999);
+      $dataSet = $data['count'] + rand(0,999);
       $clod = $data['count'];
       Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
       return [
-        'form' => $this->renderPartial('or-param', ['data' => $data, 'clod' => $clod]),
+        'form' => $this->renderPartial('or-param', ['data' => $dataSet, 'clod' => $clod]),
         'data' => $data
       ];
       

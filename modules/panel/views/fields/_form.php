@@ -13,11 +13,10 @@ use yii\widgets\ActiveForm;
   <?php $form = ActiveForm::begin(); ?>
   <input type="hidden" value="<?= (isset($reserv) && !empty($reserv) ? count($reserv) : '0') ?>" class="col_param">
   <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-  <?= $form->field($model, 'plaseholder')->textInput() ?>
   <div class="col-md-12 mt-3">
     <label for="">Группа полей</label>
   </div>
-  <?php if (is_array($reserv) && isset($reserv) && !empty($reserv)) : ?>
+  <?php if (isset($reserv) && !empty($reserv)  && is_array($reserv)) : ?>
     <?php foreach ($reserv as $key => $item) : ?>
       <div class="col-md-12 mt-3 card">
         <div class="row">

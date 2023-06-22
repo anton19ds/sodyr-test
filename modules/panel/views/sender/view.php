@@ -16,15 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 
       <div class="col-md-12">
-        <? if (!empty($viter)) : ?>
-          
-          <?= htmlspecialchars_decode($viter)?>
-        <? else : ?>
+        <?php if (!empty($viter)): ?>
+
+          <?= htmlspecialchars_decode($viter) ?>
+        <?php else: ?>
           Не подходят условия
-        <? endif; ?>
+        <?php endif; ?>
       </div>
 
-      
+
     </div>
   </div>
 </div>

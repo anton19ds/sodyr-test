@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
   </div>
     <label for="">Просмотреть</label>
     <?= Html::dropDownList('sdfer','',['' => 'Выбрать сообщение...','сообщения' => ArrayHelper::map($messege, 'id', 'id')],['class' => 'form-control', 'id' => 'viewSender', 'data-template' => $model->id])?>
-  <?//echo nl2br($model->template)?>
+  
   </div>
   
 </div>

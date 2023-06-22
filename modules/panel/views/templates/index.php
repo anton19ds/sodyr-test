@@ -37,7 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attribute' => 'bot_id',
         'value' => function ($model) {
           $bot = $model->bot;
-          return $bot->name;
+          if(isset($bot->name)){
+            return $bot->name;
+            
+          }
+          
         }
       ],
       [
